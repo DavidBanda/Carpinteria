@@ -1,0 +1,132 @@
+{% extends "products/index.html" %}
+{% block content %}
+
+<!--/ News Star /-->
+<section class="section-news section-t8">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-wrap d-flex justify-content-between">
+          <div class="title-box">
+            <h2 class="title-a">Productos Disponibles</h2>
+          </div>
+          <div class="title-link">
+            <a href="{% url 'products-product_grid' %}">Ver Todo
+              <span class="ion-ios-arrow-forward"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% for product in ProductFilter %}
+        <div class="col-md-4">
+          <div class="card-box-a card-shadow">
+            <div class="img-box-a">
+              <img src="{{ product.image.url }}" id="img-roun" class="img-a img-fluid">
+            </div>
+            <div class="card-overlay">
+              <div class="card-overlay-a-content">
+                <div class="card-header-a">
+                  <h2 class="card-title-a">
+                    <a href="#">{{ product.title }}
+                      <br/> </a>
+                  </h2>
+                </div>
+                <div class="card-body-a">
+                  <div class="price-box d-flex">
+                    <span class="price-a">{{ product.category }}</span>
+                  </div>
+                  <a href="{% url 'product-single' product product.id %}" class="link-a">Click para visualizar
+                    <span class="ion-ios-arrow-forward"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!--/ News End /-->
+
+<!--/ Services Star /-->
+<section class="section-services section-t8" id="servicios">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-wrap d-flex justify-content-between">
+          <div class="title-box">
+            <h2 class="title-a">Nuestros Servicios</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card-box-c foo">
+          <div class="card-header-c d-flex">
+            <div class="card-box-ico">
+              <span class="fas fa-pencil-alt"></span>
+            </div>
+            <div class="card-title-c align-self-center">
+              <h2 class="title-c">Diseño</h2>
+            </div>
+          </div>
+          <div class="card-body-c">
+            <p class="content-c" style="text-align:justify;">
+              Diseñamos cualquier producto que desee a su gusto.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              ia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-box-c foo">
+          <div class="card-header-c d-flex">
+            <div class="card-box-ico">
+              <span class="fas fa-dollar-sign"></span>
+            </div>
+            <div class="card-title-c align-self-center">
+              <h2 class="title-c">Venta</h2>
+            </div>
+          </div>
+          <div class="card-body-c">
+            <p class="content-c" style="text-align:justify;">
+              Vendemos toda clase de productos, desde estantes hasta cocinas.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+               incididunt ut labore et dolore magna aliqua.
+
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-box-c foo">
+          <div class="card-header-c d-flex">
+            <div class="card-box-ico">
+              <span class="fas fa-dollar-sign"></span>
+            </div>
+            <div class="card-title-c align-self-center">
+              <h2 class="title-c">Venta</h2>
+            </div>
+          </div>
+          <div class="card-body-c">
+            <p class="content-c" style="text-align:justify;">
+              Vendemos toda clase de productos, desde estantes hasta cocinas.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+               incididunt ut labore et dolore magna aliqua.
+
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/ Services End /-->
+
+{% endblock content %}

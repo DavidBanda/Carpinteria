@@ -1,0 +1,131 @@
+{% extends "products/index.html" %}
+{% block content %}
+
+<!--/ Intro Single star /-->
+<section class="intro-single">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-8">
+        <div class="title-single-box">
+          <h1 class="title-single">Nuestros Increibles Productos</h1>
+          <span class="color-text-a">Lista de productos</span>
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-4">
+        <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'products-home' %}">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Productos
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/ Intro Single End /-->
+
+<!--/ search filter /-->
+<section class="property-grid grid">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="grid-option">
+          <form method="post" name="q">
+            {% csrf_token %}
+            <select class="custom-select" name="drop" onchange='if(this.value != 0) { this.form.submit(); }'>
+              <option value="Todo">Todo</option>
+              <option value="Baño">Baño</option>
+              <option value="Cocina">Cocina</option>
+              <option value="Comedor">Comedor</option>
+              <option value="Recamara">Recamara</option>
+              <option value="Sala">Sala</option>
+            </select>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/ search filter end /-->
+
+<!--/ products list /-->
+<section class="property-grid grid">
+  <div class="container">
+    <div class="row">
+      {% for product in Product %}
+        <div class="col-md-4">
+          <div class="card-box-a card-shadow">
+            <div class="img-box-a">
+              <img src="{{ product.image.url }}" id="img-roun" class="img-a img-fluid">
+            </div>
+            <div class="card-overlay">
+              <div class="card-overlay-a-content">
+                <div class="card-header-a">
+                  <h2 class="card-title-a">
+                    <a href="#">{{ product.title }}
+                      <br/> </a>
+                  </h2>
+                </div>
+                <div class="card-body-a">
+                  <div class="price-box d-flex">
+                    <span class="price-a">{{ product.category }}</span>
+                  </div>
+                  <a href="{% url 'product-single' product product.id %}" class="link-a">Click para visualizar
+                    <span class="ion-ios-arrow-forward"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!--/ products list end/-->
+
+<br><br>
+
+<!--/ Page number /-->
+{% if is_paginated %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <nav class="pagination-a">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              {% if page_obj.has_previous %}
+                <a class="btn btn-light mb-4" href="?page=1">
+                  <span class="ion-ios-arrow-back"></span>
+                </a>
+              {% endif %}
+            </li>
+            <li class="page-item active">
+              {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                  <a class="btn btn-secondary mb-4" href="?page={{ num }}">{{ num }} </a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                  <a class="btn btn-outline-secondary mb-4" href="?page={{ num }}">{{ num }} </a>
+                {% endif %}
+              {% endfor %}
+            </li>
+            <li class="page-item next">
+              {% if page_obj.has_next %}
+                <a class="btn btn-light mb-4" href="?page={{ page_obj.paginator.num_pages }}">
+                  <span class="ion-ios-arrow-forward mb-4"></span>
+                </a>
+              {% endif %}
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+{% endif %}
+<!--/ Page number end/-->
+
+{% endblock content %}
